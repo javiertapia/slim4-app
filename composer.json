@@ -1,13 +1,13 @@
 {
-    "name": "slim/slim-skeleton",
-    "description": "A Slim Framework skeleton application for rapid development",
+    "name": "javiertapia/slim4app",
+    "description": "App Skeleton (based on slimphp/Slim-Skeleton)",
     "keywords": [
         "microframework",
         "rest",
         "router",
         "psr7"
     ],
-    "homepage": "http://github.com/slimphp/Slim-Skeleton",
+    "homepage": "http://github.com/javiertapia/Slim4App",
     "license": "MIT",
     "authors": [
         {
@@ -19,10 +19,15 @@
             "name": "Pierre Berube",
             "email": "pierre@lgse.com",
             "homepage": "http://www.lgse.com/"
+        },
+        {
+            "name": "Javier Tapia",
+            "email": "javier.tapia.d@gmail.com",
+            "homepage": "https://javiertapia.cl/"
         }
     ],
     "require": {
-        "php": "^7.2 || ^8.0",
+        "php": "^8.0",
         "ext-json": "*",
         "monolog/monolog": "^2.2",
         "php-di/php-di": "^6.3",
