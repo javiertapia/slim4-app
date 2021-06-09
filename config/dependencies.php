@@ -2,6 +2,9 @@
 declare(strict_types=1);
 
 use App\Application\Settings\SettingsInterface;
+use Illuminate\Container\Container;
+use Illuminate\Database\Connection;
+use Illuminate\Database\Connectors\ConnectionFactory;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Monolog\Processor\UidProcessor;
@@ -44,5 +47,18 @@ return [
             (bool)$settings->get('logError'),
             (bool)$settings->get('logErrorDetails')
         );
-    }
+    },
+
+    Connection::class => function (ContainerInterface $container) {
+        $factory = new ConnectionFactory(new Container());
+        $settings = $container->get(SettingsInterface::class);
+        $connection = $factory->make($settings->get('db'));
+        // Disable the query log to prevent memory issues
+        $connection->disableQueryLog();
+        return $connection;
+    },
+
+    PDO::class => function (ContainerInterface $container) {
+        return $container->get(Connection::class)->getPdo();
+    },
 ];

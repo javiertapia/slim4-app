@@ -35,6 +35,23 @@ The first time this command _pull_ the required docker images and build the serv
 
 After that, open `http://localhost:8088` in your browser.
 
+Create `users` table using:
+
+```sql
+create table users
+(
+    id int auto_increment
+        primary key,
+    username varchar(255) null,
+    email varchar(255) null,
+    first_name varchar(255) null,
+    last_name varchar(255) null,
+    constraint username
+        unique (username)
+)
+    collate=utf8mb4_unicode_ci;
+```
+
 ## Makefile shortcuts
 
 At the command line, put into the project directory and run this shortcuts:
@@ -77,7 +94,7 @@ Show a summary of the available `make` commands.
 - [x] Custom error handler
 - [x] Error logger
 - [x] .env support
-- [ ] Setup database connection
+- [x] Setup database connection
 - [ ] Setup mailer 
 - [ ] Twig Template system
 - [ ] MtHaml Template system
