@@ -1,6 +1,8 @@
 <?php
 declare(strict_types=1);
 
+use App\Application\Actions\HelloAction;
+use App\Application\Actions\HelloAgainAction;
 use App\Application\Actions\SendEmailAction;
 use App\Application\Actions\User\ListUsersAction;
 use App\Application\Actions\User\UserCreateAction;
@@ -29,5 +31,6 @@ return function (App $app) {
         $group->post('', UserCreateAction::class);
     });
 
-    $app->get('/hello', \App\Application\Actions\HelloAction::class);
+    $app->get('/hello', HelloAction::class);
+    $app->get('/hello-again', HelloAgainAction::class);
 };

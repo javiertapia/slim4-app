@@ -36,4 +36,12 @@ final class ViewRendererFactory
         $this->response->getBody()->write($html);
         return $this->response;
     }
+
+    public function addPathToLoader(string $path = null): void
+    {
+        if (empty($path)) {
+            return;
+        }
+        $this->loader->addPath($path);
+    }
 }
