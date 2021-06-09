@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 use App\Application\Actions\HelloAction;
 use App\Application\Actions\HelloAgainAction;
+use App\Application\Actions\HelloAgainAgainAction;
 use App\Application\Actions\SendEmailAction;
 use App\Application\Actions\User\ListUsersAction;
 use App\Application\Actions\User\UserCreateAction;
@@ -33,4 +34,5 @@ return function (App $app) {
 
     $app->get('/hello', HelloAction::class);
     $app->get('/hello-again', HelloAgainAction::class);
+    $app->get('/hello-again-again', HelloAgainAgainAction::class);
 };

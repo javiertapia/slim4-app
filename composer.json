@@ -32,6 +32,7 @@
         "ext-pdo": "*",
         "illuminate/database": "^8.46",
         "monolog/monolog": "^2.2",
+        "mthaml/mthaml": "dev-master",
         "php-di/php-di": "^6.3",
         "phpmailer/phpmailer": "^6.4",
         "slim/psr7": "^1.3",

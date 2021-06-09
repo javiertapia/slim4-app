@@ -1,0 +1,12 @@
+- extends 'layout.haml'
+
+- block contents
+    %h1 Hello again #{ name }!
+    %p
+        You have
+        = notifications|length
+        new notification(s).
+    - if notifications|length > 0
+        %ul
+            - for notification in notifications
+                %li = notification

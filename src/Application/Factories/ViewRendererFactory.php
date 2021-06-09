@@ -1,6 +1,7 @@
 <?php
 namespace App\Application\Factories;
 
+use MtHaml\Support\Twig\Loader;
 use Psr\Http\Message\ResponseInterface;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
@@ -27,7 +28,10 @@ final class ViewRendererFactory
         $twigOptions = ($cacheEnabled && $cacheLocation)
             ? ['cache' => $cacheLocation]
             : ['cache' => false];
-        return new Environment($this->loader, $twigOptions);
+
+        $haml = new \MtHaml\Environment('twig', ['enable_escaper' => false]);
+        $hamlLoader = new Loader($haml, $this->loader);
+        return new Environment($hamlLoader, $twigOptions);
     }
 
     public function render(string $template, array $viewData): ResponseInterface
