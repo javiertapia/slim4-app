@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use App\Application\Factories\MailerFactory;
 use App\Application\Settings\SettingsInterface;
 use Illuminate\Container\Container;
 use Illuminate\Database\Connection;
@@ -61,4 +62,9 @@ return [
     PDO::class => function (ContainerInterface $container) {
         return $container->get(Connection::class)->getPdo();
     },
+
+    MailerFactory::class => function (ContainerInterface $container) {
+        $settings = $container->get(SettingsInterface::class);
+        return new MailerFactory($settings->get('mailer') ?? []);
+    }
 ];

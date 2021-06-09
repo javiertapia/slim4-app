@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use App\Application\Actions\SendEmailAction;
 use App\Application\Actions\User\ListUsersAction;
 use App\Application\Actions\User\UserCreateAction;
 use App\Application\Actions\User\ViewUserAction;
@@ -19,6 +20,8 @@ return function (App $app) {
         $response->getBody()->write('Hello world!');
         return $response;
     });
+
+    $app->post('/email', SendEmailAction::class);
 
     $app->group('/users', function (Group $group) {
         $group->get('', ListUsersAction::class);

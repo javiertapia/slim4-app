@@ -16,7 +16,7 @@ return [
                 'path'  => isset($_ENV['docker']) ? 'php://stdout' : __DIR__ . '/../logs/app.log',
                 'level' => Logger::DEBUG,
             ],
-            'db'     => [
+            'db'                  => [
                 'driver'    => 'mysql',
                 'host'      => $_ENV['DB_HOST'] ?? 'localhost',
                 'database'  => $_ENV['DB_DATABASE'] ?? 'test',
@@ -35,6 +35,19 @@ return [
                     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
                     // Set character set
                     PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci',
+                ],
+            ],
+            'mailer'              => [
+                'from' => [
+                    'name'  => $_ENV['EMAIL_FROM_NAME'] ?? 'admin',
+                    'email' => $_ENV['EMAIL_FROM_EMAIL'] ?? 'admin@localhost',
+                ],
+                'bcc'  => explode(',', ($_ENV['EMAIL_BCC'] ?? '')),
+                'smtp' => [
+                    'host' => $_ENV['SMTP_HOST'] ?? null,
+                    'user' => $_ENV['SMTP_USER'] ?? null,
+                    'pass' => $_ENV['SMTP_PASS'] ?? null,
+                    'port' => $_ENV['SMTP_PORT'] ?? null,
                 ],
             ],
         ]);
