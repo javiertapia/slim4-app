@@ -1,42 +1,83 @@
-# Slim Framework 4 Skeleton Application
+# Slim 4 App
 
-[![Coverage Status](https://coveralls.io/repos/github/slimphp/Slim-Skeleton/badge.svg?branch=master)](https://coveralls.io/github/slimphp/Slim-Skeleton?branch=master)
+Based in [Slim 4 Skeleton Application](https://github.com/slimphp/Slim-Skeleton), this project enhances the codebase using a more complete Docker stack, .env file support and database-connection setup.
 
-Use this skeleton application to quickly setup and start working on a new Slim Framework 4 application. This application uses the latest Slim 4 with Slim PSR-7 implementation and PHP-DI container implementation. It also uses the Monolog logger.
+## Features
 
-This skeleton application was built for Composer. This makes setting up a new Slim Framework application quick and easy.
+* Based in Slim 4 Framework with Slim PSR-7 implementation and PHP-DI container implementation.
+* Uses the Monolog logger.
+* Built for Composer (Set up a new Slim Framework quick and easy).
+* Support for `.env` config file.
+* Use `illuminate/database` Query Builder.
+* Useful `Makefile` shortcuts.
 
 ## Install the Application
 
 Run this command from the directory in which you want to install your new Slim Framework application.
 
 ```bash
-composer create-project slim/slim-skeleton [my-app-name]
+composer create-project javiertapia/Slim4App [my-app-name]
 ```
 
-Replace `[my-app-name]` with the desired directory name for your new application. You'll want to:
+Where `[my-app-name]` is the directory name for the new application.
 
-* Point your virtual host document root to your new application's `public/` directory.
-* Ensure `logs/` is web writable.
+* The host document root is the `public/` directory.
+* The `logs/` directory must be web writable.
 
-To run the application in development, you can run these commands 
+To run the application in development, using `docker-compose`: 
 
 ```bash
 cd [my-app-name]
-composer start
+docker-compose up
 ```
 
-Or you can use `docker-compose` to run the app with `docker`, so you can run these commands:
-```bash
-cd [my-app-name]
-docker-compose up -d
-```
-After that, open `http://localhost:8080` in your browser.
+The first time this command _pull_ the required docker images and build the services. This can take a while.
 
-Run this command in the application directory to run the test suite
+After that, open `http://localhost:8088` in your browser.
 
-```bash
-composer test
-```
+## Makefile shortcuts
 
-That's it! Now go build something cool.
+At the command line, put into the project directory and run this shortcuts:
+
+`make d-up`
+
+Start all the docker containers in _detached_ mode (i.e, these will run in background).
+Is a shortcut for the command `docker-compose up -d`.
+
+`make d-down`
+
+Stop all docker containers. Is a shortcut of `docker-compose down`.
+
+`make d-bash`
+
+Open the shell `/bin/sh` into the `php` container's service. Is a shortcut of `docker-compose exec php /bin/sh`.
+
+`make d-test`
+
+Run `phpunit` tests at `/www/tests` directory, using `/www/tests/bootstrap.php` as bootstrap file.
+
+`make d-composer`
+
+Run `composer install` from the container's image, over the project's `composer.json` file.
+Is a shortcut of `docker-compose exec php /bin/sh -c "cd /www && composer install"`
+
+`make phpstan [DIR=<dir>]`
+
+Execute PhpStan from his official docker image, over a specified directory. The `DIR` parameter is optional.
+Is a shortcut of 
+`docker run --rm -v .:/www ghcr.io/phpstan/phpstan --level=7 analyse /www/src/<dir> --autoload-file /www/vendor/autoload.php`
+
+`make help`
+
+Show a summary of the available `make` commands.
+
+## (Desired) features
+
+- [x] Configuration object
+- [x] Custom error handler
+- [x] Error logger
+- [ ] .env support
+- [ ] Setup database connection
+- [ ] Setup mailer 
+- [ ] Twig Template system
+- [ ] MtHaml Template system
