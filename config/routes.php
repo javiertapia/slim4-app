@@ -28,4 +28,6 @@ return function (App $app) {
         $group->get('/{id}', ViewUserAction::class);
         $group->post('', UserCreateAction::class);
     });
+
+    $app->get('/hello', \App\Application\Actions\HelloAction::class);
 };

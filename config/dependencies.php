@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 use App\Application\Factories\MailerFactory;
+use App\Application\Factories\ViewRendererFactory;
 use App\Application\Settings\SettingsInterface;
 use Illuminate\Container\Container;
 use Illuminate\Database\Connection;
@@ -14,6 +15,8 @@ use Psr\Log\LoggerInterface;
 use Slim\App;
 use Slim\Factory\AppFactory;
 use Slim\Middleware\ErrorMiddleware;
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
 
 return [
     App::class => function (ContainerInterface $container) {
@@ -66,5 +69,13 @@ return [
     MailerFactory::class => function (ContainerInterface $container) {
         $settings = $container->get(SettingsInterface::class);
         return new MailerFactory($settings->get('mailer') ?? []);
-    }
+    },
+
+    ViewRendererFactory::class => function (ContainerInterface $container) {
+        $settings = $container->get(SettingsInterface::class);
+        /** @var App $app */
+        $app = $container->get(App::class);
+        $responseFactory = $app->getResponseFactory();
+        return new ViewRendererFactory($responseFactory->createResponse(), $settings->get('twig'));
+    },
 ];

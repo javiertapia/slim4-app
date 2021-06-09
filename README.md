@@ -96,5 +96,5 @@ Show a summary of the available `make` commands.
 - [x] .env support
 - [x] Setup database connection
 - [x] Setup mailer 
-- [ ] Twig Template system
+- [x] Twig Template system
 - [ ] MtHaml Template system

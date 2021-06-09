@@ -50,6 +50,15 @@ return [
                     'port' => $_ENV['SMTP_PORT'] ?? null,
                 ],
             ],
+            'twig'                => [
+                'paths'   => [
+                    dirname(__DIR__) . '/templates',
+                ],
+                'options' => [
+                    'cache_enabled' => (bool)($_ENV['PRODUCTION_ENV'] ?? false),
+                    'cache_path'    => dirname(__DIR__) . '/var/cache',
+                ],
+            ],
         ]);
     },
 ];
