@@ -76,7 +76,7 @@ Show a summary of the available `make` commands.
 - [x] Configuration object
 - [x] Custom error handler
 - [x] Error logger
-- [ ] .env support
+- [x] .env support
 - [ ] Setup database connection
 - [ ] Setup mailer 
 - [ ] Twig Template system

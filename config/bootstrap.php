@@ -6,15 +6,20 @@ use App\Application\Handlers\ShutdownHandler;
 use App\Application\ResponseEmitter\ResponseEmitter;
 use App\Application\Settings\SettingsInterface;
 use DI\ContainerBuilder;
+use Dotenv\Dotenv;
 use Slim\App;
 use Slim\Factory\ServerRequestCreatorFactory;
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
+$dotenv = Dotenv::createImmutable(dirname(__DIR__));
+$dotenv->load();
+
 // Instantiate PHP-DI ContainerBuilder
 $containerBuilder = new ContainerBuilder();
 
-if (false) { // Should be set to true in production
+$enableCompilation = (bool)($_ENV['APP_ENABLE_COMPILATION'] ?? true);
+if ($enableCompilation === false) {
     $containerBuilder->enableCompilation(dirname(__DIR__) . '/var/cache');
 }
 
