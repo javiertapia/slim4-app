@@ -10,28 +10,28 @@ class User implements JsonSerializable
     /**
      * @var int|null
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @var string
      */
-    private $username;
+    private string $username;
 
     /**
      * @var string
      */
-    private $firstName;
+    private string $firstName;
 
     /**
      * @var string
      */
-    private $lastName;
+    private string $lastName;
 
     /**
-     * @param int|null  $id
-     * @param string    $username
-     * @param string    $firstName
-     * @param string    $lastName
+     * @param int|null $id
+     * @param string   $username
+     * @param string   $firstName
+     * @param string   $lastName
      */
     public function __construct(?int $id, string $username, string $firstName, string $lastName)
     {
@@ -76,13 +76,13 @@ class User implements JsonSerializable
     /**
      * @return array
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
-            'id' => $this->id,
-            'username' => $this->username,
+            'id'        => $this->id,
+            'username'  => $this->username,
             'firstName' => $this->firstName,
-            'lastName' => $this->lastName,
+            'lastName'  => $this->lastName,
         ];
     }
 }

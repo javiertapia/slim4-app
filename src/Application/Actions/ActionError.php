@@ -20,12 +20,12 @@ class ActionError implements JsonSerializable
     /**
      * @var string
      */
-    private $type;
+    private string $type;
 
     /**
-     * @var string
+     * @var string|null
      */
-    private $description;
+    private ?string $description;
 
     /**
      * @param string        $type
@@ -76,13 +76,11 @@ class ActionError implements JsonSerializable
     /**
      * @return array
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
-        $payload = [
+        return [
             'type' => $this->type,
             'description' => $this->description,
         ];
-
-        return $payload;
     }
 }

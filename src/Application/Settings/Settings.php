@@ -8,7 +8,7 @@ class Settings implements SettingsInterface
     /**
      * @var array
      */
-    private $settings;
+    private array $settings;
 
     /**
      * Settings constructor.
@@ -23,7 +23,7 @@ class Settings implements SettingsInterface
      * @param string $key
      * @return mixed
      */
-    public function get(string $key = '')
+    public function get(string $key = ''): mixed
     {
         return (empty($key)) ? $this->settings : $this->settings[$key];
     }

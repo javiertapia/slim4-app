@@ -12,17 +12,17 @@ class ShutdownHandler
     /**
      * @var Request
      */
-    private $request;
+    private Request $request;
 
     /**
      * @var HttpErrorHandler
      */
-    private $errorHandler;
+    private HttpErrorHandler $errorHandler;
 
     /**
      * @var bool
      */
-    private $displayErrorDetails;
+    private bool $displayErrorDetails;
 
     /**
      * ShutdownHandler constructor.
@@ -54,21 +54,21 @@ class ShutdownHandler
             if ($this->displayErrorDetails) {
                 switch ($errorType) {
                     case E_USER_ERROR:
-                        $message = "FATAL ERROR: {$errorMessage}. ";
-                        $message .= " on line {$errorLine} in file {$errorFile}.";
+                        $message = "FATAL ERROR: $errorMessage. ";
+                        $message .= " on line $errorLine in file $errorFile.";
                         break;
 
                     case E_USER_WARNING:
-                        $message = "WARNING: {$errorMessage}";
+                        $message = "WARNING: $errorMessage";
                         break;
 
                     case E_USER_NOTICE:
-                        $message = "NOTICE: {$errorMessage}";
+                        $message = "NOTICE: $errorMessage";
                         break;
 
                     default:
-                        $message = "ERROR: {$errorMessage}";
-                        $message .= " on line {$errorLine} in file {$errorFile}.";
+                        $message = "ERROR: $errorMessage";
+                        $message .= " on line $errorLine in file $errorFile.";
                         break;
                 }
             }
