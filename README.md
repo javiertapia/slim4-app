@@ -16,7 +16,7 @@ Based in [Slim 4 Skeleton Application](https://github.com/slimphp/Slim-Skeleton)
 Run this command from the directory in which you want to install your new Slim Framework application.
 
 ```bash
-composer create-project javiertapia/Slim4App [my-app-name]
+git clone https://github.com/javiertapia/slim4-app.git [my-app-name]
 ```
 
 Where `[my-app-name]` is the directory name for the new application.
