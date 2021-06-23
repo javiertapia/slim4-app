@@ -1,6 +1,7 @@
 <?php
 namespace App\Application\Factories;
 
+use MtHaml\Support\Twig\Extension;
 use MtHaml\Support\Twig\Loader;
 use Psr\Http\Message\ResponseInterface;
 use Twig\Environment;
@@ -31,7 +32,9 @@ final class ViewRendererFactory
 
         $haml = new \MtHaml\Environment('twig', ['enable_escaper' => false]);
         $hamlLoader = new Loader($haml, $this->loader);
-        return new Environment($hamlLoader, $twigOptions);
+        $twigEnvironment = new Environment($hamlLoader, $twigOptions);
+        $twigEnvironment->addExtension(new Extension());
+        return $twigEnvironment;
     }
 
     public function render(string $template, array $viewData): ResponseInterface
